@@ -1,13 +1,8 @@
 import { CERTIFICATIONS } from '@/data';
 import { Section } from '@/components/ui';
-
 import styles from './certifications.module.css';
 
-// ─── Certifications ─────────────────────────
-// Holocron badges for completed Jedi trials.
-//
 // "Your training is complete." — Emperor
-// ─────────────────────────────────────────────
 
 export const Certifications = (): React.JSX.Element => (
   <Section id="certifications">

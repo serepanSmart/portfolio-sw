@@ -38,10 +38,7 @@ function applyTheme(theme: Theme): void {
   }
 }
 
-// ─── Store ──────────────────────────────────
 // "You underestimate the power of the Dark Side."
-// Default theme: dark. Toggle to join the Light Side.
-// ─────────────────────────────────────────────
 
 export const useThemeStore = create<ThemeState>((set, get) => ({
   theme: getStoredTheme(),

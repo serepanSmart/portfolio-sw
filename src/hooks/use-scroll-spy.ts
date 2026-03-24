@@ -1,15 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-
 import { NAV_ITEMS } from '@/data';
-
 import type { NavItemId } from '@/models';
 
-// ─── useScrollSpy ───────────────────────────
-// Tracks which section is currently in view
-// and returns its ID for active nav highlighting.
-//
 // "Stay on target." — Gold Five
-// ─────────────────────────────────────────────
 
 type UseScrollSpyOptions = {
   offset?: number;

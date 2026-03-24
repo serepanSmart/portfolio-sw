@@ -4,15 +4,10 @@ import { SocialIcon } from '@/components/ui';
 
 import styles from './footer.module.css';
 
-// ─── Footer ─────────────────────────────────
-// Star Wars quote, social links, copyright.
-//
 // "This is the way." — The Mandalorian
-// ─────────────────────────────────────────────
 
 export const Footer = (): React.JSX.Element => {
   const { quote, nextQuote } = useRandomQuote();
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className={styles.footer}>
@@ -48,7 +43,7 @@ export const Footer = (): React.JSX.Element => {
 
         {/* Copyright */}
         <p className={styles.copyright}>
-          © {currentYear}
+          ©{''}
           {PERSONAL_INFO.name}. All rights reserved.
         </p>
         <p className={styles.tagline}>

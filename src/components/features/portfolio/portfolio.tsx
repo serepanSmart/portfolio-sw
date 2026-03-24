@@ -5,8 +5,6 @@ import { Section, Badge } from '@/components/ui';
 
 import styles from './portfolio.module.css';
 
-// ─── Placeholder colors (Star Wars HUD) ────
-
 const PLACEHOLDER_COLORS = [
   ['#1a1a3e', '#0d2847'],
   ['#1a0a2e', '#2d1b4e'],
@@ -27,13 +25,11 @@ const getInitials = (title: string): string =>
     .join('')
     .toUpperCase();
 
-// ─── Portfolio Image with Fallback ──────────
-
-type PortfolioImageProps = {
+interface PortfolioImageProps {
   src: string;
   alt: string;
   index: number;
-};
+}
 
 const PortfolioImage = ({
   src,
@@ -100,7 +96,6 @@ export const Portfolio = (): React.JSX.Element => {
 
   return (
     <Section id="portfolio">
-      {/* Filter Bar */}
       <div className={styles.filters}>
         {PORTFOLIO_FILTERS.map((filter) => (
           <button
@@ -115,8 +110,6 @@ export const Portfolio = (): React.JSX.Element => {
           </button>
         ))}
       </div>
-
-      {/* Project Grid */}
       <div className={styles.grid}>
         {filteredItems.map((item, index) => (
           <a

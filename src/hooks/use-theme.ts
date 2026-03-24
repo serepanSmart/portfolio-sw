@@ -1,13 +1,7 @@
 import { useThemeStore } from '@/stores';
-
 import type { Theme } from '@/models';
 
-// ─── useTheme ───────────────────────────────
-// Convenience hook wrapping the Zustand theme store.
-// Provides current theme + toggle + set actions.
-//
 // "You underestimate the power of the Dark Side."
-// ─────────────────────────────────────────────
 
 type UseThemeReturn = {
   theme: Theme;

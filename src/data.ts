@@ -19,13 +19,13 @@ export const NAV_ITEMS = [
 
 export const PERSONAL_INFO = {
   name: 'serhii vovna',
-  title: 'Senior Frontend Developer',
+  title: 'Senior/Lead Frontend Developer',
   subtitle: 'React / TypeScript Jedi',
   tagline: 'May the clean code be with you.',
   description:
     '7+ years wielding the Force of web development. Disciplined, analytical, and ready to lead your frontend squad into battle. Specializing in React ecosystems, TypeScript mastery, and scalable architecture.',
-  location: 'Kharkiv, Ukraine',
-  avatar: '/images/avatar.webp',
+  location: 'Ukraine',
+  avatar: '/images/avatar.png',
 } as const;
 
 // ─── Contact Info ───────────────────────────
@@ -85,7 +85,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     id: 'styling',
-    title: 'Visual Holocrons',
+    title: 'visual holocrons',
     icon: '🎨',
     skills: [
       { name: 'CSS3 / SASS / SCSS / LESS', level: 95 },
@@ -310,17 +310,29 @@ export const EXPERIENCE = [
 export const CLIENTS = [
   { id: 'icims', name: 'iCIMS', url: 'https://www.icims.com' },
   { id: 'jollytech', name: 'JollyTech', url: 'https://www.jollytech.com' },
-  { id: 'pepsico', name: 'PepsiCo', url: 'https://www.pepsico.com' },
-  { id: 'comcast', name: 'Comcast', url: 'https://corporate.comcast.com' },
-  { id: 'fedex', name: 'FedEx', url: 'https://www.fedex.com' },
+  { id: 'pepsico', name: 'PepsiCo', url: 'https://www.pepsicojobs.com/main/' },
+  { id: 'comcast', name: 'Comcast', url: 'https://jobs.comcast.com/' },
+  { id: 'fedex', name: 'FedEx', url: 'https://careers.fedex.com/' },
   {
     id: 'spirit-airlines',
     name: 'Spirit Airlines',
-    url: 'https://www.spirit.com',
+    url: 'https://careers.spirit.com/careers-home/',
   },
-  { id: 'hertz', name: 'Hertz', url: 'https://www.hertz.com' },
-  { id: 'statefarm', name: 'StateFarm', url: 'https://www.statefarm.com' },
-  { id: 'dr-pepper', name: 'Dr Pepper', url: 'https://www.drpepper.com' },
+  {
+    id: 'hertz',
+    name: 'Hertz',
+    url: 'https://jobs.hertzcareers.com/#en/sites/CX_1',
+  },
+  {
+    id: 'statefarm',
+    name: 'StateFarm',
+    url: 'https://jobs.statefarm.com/main/',
+  },
+  {
+    id: 'dr-pepper',
+    name: 'Dr Pepper',
+    url: 'https://careers.keurigdrpepper.com/en',
+  },
   { id: 'weorder', name: 'WeOrder', url: 'https://app.weorder.com/' },
   {
     id: 'audienzz',
@@ -337,7 +349,32 @@ export const CLIENTS = [
   {
     id: 'first-citizens',
     name: 'First Citizens Bank',
-    url: 'https://www.firstcitizens.com',
+    url: 'https://jobs.firstcitizens.com/',
+  },
+  {
+    id: 'cheesecake-factory',
+    name: 'Cheesecake Factory',
+    url: 'https://www.cakecareers.com/main/',
+  },
+  {
+    id: 'ascension-health',
+    name: 'Ascension Health',
+    url: 'https://jobs.ascension.org/us/en/all-jobs',
+  },
+  {
+    id: 'ardenthealth-health',
+    name: 'Ardent Health',
+    url: 'https://jobs.ardenthealth.com/careers/',
+  },
+  {
+    id: 'wipro',
+    name: 'Wipro',
+    url: 'https://careers.wipro.com/',
+  },
+  {
+    id: 'aloha-petroleum',
+    name: 'Aloha Petroleum',
+    url: 'https://www.alohagas.com/careers/careers-at-aloha-petroleum',
   },
 ] as const;
 
@@ -467,12 +504,36 @@ export const STATS = [
 // ─── Soft Skills (Jedi Traits) ──────────────
 
 export const SOFT_SKILLS = [
-  { id: 'leader', label: 'Team Lead / Commander', icon: 'commander' },
-  { id: 'teamwork', label: 'Team Player', icon: 'wookiee' },
-  { id: 'communication', label: 'Communication Skills', icon: 'r2d2' },
-  { id: 'organization', label: 'Organizational Skills', icon: 'vader' },
-  { id: 'responsibility', label: 'Responsibility', icon: 'mandalorian' },
-  { id: 'purpose', label: 'Purposefulness', icon: 'grogu' },
+  {
+    id: 'leader',
+    label: 'Team Lead / Commander',
+    icon: '/icons/vader.png',
+  },
+  {
+    id: 'teamwork',
+    label: 'Team Player',
+    icon: '/icons/mill.png',
+  },
+  {
+    id: 'communication',
+    label: 'Communication Skills',
+    icon: '/icons/ds.png',
+  },
+  {
+    id: 'organization',
+    label: 'Organizational Skills',
+    icon: '/icons/yoda.png',
+  },
+  {
+    id: 'responsibility',
+    label: 'Responsibility',
+    icon: '/icons/r2.png',
+  },
+  {
+    id: 'purpose',
+    label: 'Purposefulness',
+    icon: '/icons/mando.png',
+  },
 ] as const;
 
 // ─── Languages ──────────────────────────────

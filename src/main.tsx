@@ -1,16 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-
 import { App } from '@/App';
 
 import '@/styles/variables.css';
 import '@/styles/reset.css';
-
-// ─── Theme Initialization ───────────────────
-// Apply saved theme BEFORE React renders to prevent
-// flash of wrong theme (FOWT). Falls back to "dark"
-// (the Dark Side is the default path).
-// ─────────────────────────────────────────────
 
 const STORAGE_KEY = 'sv-portfolio-theme';
 const DEFAULT_THEME = 'dark';
@@ -30,8 +23,6 @@ function getInitialTheme(): string {
 }
 
 document.documentElement.setAttribute('data-theme', getInitialTheme());
-
-// ─── React Root ─────────────────────────────
 
 const rootElement = document.getElementById('root');
 

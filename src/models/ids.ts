@@ -1,7 +1,3 @@
-// ─── Derived ID types from constants ────────
-// These are string literal unions derived from constant data.
-// Use them to enforce type-safe references across components.
-
 import type {
   NAV_ITEMS,
   SOCIAL_LINKS,

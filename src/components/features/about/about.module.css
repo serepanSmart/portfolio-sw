@@ -124,8 +124,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-6) var(--space-4);
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-4);
   border: var(--border-thin) solid var(--color-border-primary);
   overflow: hidden;
   transition:
@@ -135,18 +135,75 @@
 
 .traitCard:hover {
   border-color: var(--color-border-accent);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-/* ─── SW Character Icon ──────────────────── */
+/* ─── Corner brackets ────────────────────── */
+
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-default);
+}
+
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: var(--color-accent-primary);
+}
+
+.cornerTL {
+  top: 8px;
+  left: 8px;
+}
+
+.cornerTL::before {
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 1px;
+}
+
+.cornerTL::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 16px;
+}
+
+.cornerBR {
+  bottom: 8px;
+  right: 8px;
+}
+
+.cornerBR::before {
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 1px;
+}
+
+.cornerBR::after {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 16px;
+}
+
+.traitCard:hover .corner {
+  opacity: 0.5;
+}
+
+/* ─── Icon ───────────────────────────────── */
 
 .traitIconWrapper {
-  width: 64px;
-  height: 64px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-accent-primary);
   transition: transform var(--duration-slow) var(--ease-default);
 }
 
@@ -154,12 +211,12 @@
   transform: scale(1.1);
 }
 
-.swIcon {
-  width: 64px;
-  height: 64px;
+.traitIcon {
+  height: 100%;
+  object-fit: cover;
 }
 
-/* ─── Trait Text ─────────────────────────── */
+/* ─── Text ───────────────────────────────── */
 
 .traitLabel {
   font-family: var(--font-body);
@@ -185,37 +242,6 @@
 .traitCard:hover .traitCharacter {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ─── Card corner decoration ─────────────── */
-
-.traitCard::before,
-.traitCard::after {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-color: var(--color-accent-primary);
-  border-style: solid;
-  opacity: 0;
-  transition: opacity var(--duration-base) var(--ease-default);
-}
-
-.traitCard::before {
-  top: 6px;
-  left: 6px;
-  border-width: 1px 0 0 1px;
-}
-
-.traitCard::after {
-  bottom: 6px;
-  right: 6px;
-  border-width: 0 1px 1px 0;
-}
-
-.traitCard:hover::before,
-.traitCard:hover::after {
-  opacity: 0.4;
 }
 
 /* ─── Stats ──────────────────────────────── */

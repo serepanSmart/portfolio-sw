@@ -1,11 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-// ─── useScrollToTop ─────────────────────────
-// Tracks scroll position and provides a
-// smooth scroll-to-top action for the FAB.
-//
 // "Punch it, Chewie!" — Han Solo
-// ─────────────────────────────────────────────
 
 type UseScrollToTopOptions = {
   visibilityThreshold?: number;

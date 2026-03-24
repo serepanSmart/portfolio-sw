@@ -1,15 +1,3 @@
-/* ============================================
-   src/app.module.css
-   Root layout styles — Star Wars Portfolio
-   "I've got a bad feeling about this..."
-   ...but the layout looks great.
-   ============================================ */
-
-/* ─── App Root Container ─────────────────────
-   Flex column layout, full viewport height.
-   Position relative for StarField z-indexing.
-   ──────────────────────────────────────────── */
-
 .app {
   position: relative;
   display: flex;
@@ -17,11 +5,6 @@
   min-height: 100dvh;
   overflow-x: hidden;
 }
-
-/* ─── Main Content Area ──────────────────────
-   Grows to fill space between Header & Footer.
-   Sections stack vertically within.
-   ──────────────────────────────────────────── */
 
 .main {
   flex: 1;
