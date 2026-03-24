@@ -78,9 +78,10 @@ export const SKILL_CATEGORIES = [
     skills: [
       { name: 'TypeScript', level: 95 },
       { name: 'JavaScript (ES6+)', level: 95 },
-      { name: 'React / React Native', level: 95 },
+      { name: 'React', level: 95 },
       { name: 'Next.js', level: 80 },
       { name: 'Redux / Redux Toolkit', level: 90 },
+      { name: 'Zustand', level: 95 },
     ],
   },
   {
@@ -114,7 +115,6 @@ export const SKILL_CATEGORIES = [
     skills: [
       { name: 'TanStack (React) Query', level: 90 },
       { name: 'Axios', level: 85 },
-      { name: 'Zustand', level: 85 },
       { name: 'REST APIs', level: 90 },
     ],
   },
@@ -409,8 +409,8 @@ export const PORTFOLIO_ITEMS = [
     image: '/images/portfolio/adconsole.png',
   },
   {
-    id: 'weorder-voksenaasen',
-    title: 'WeOrder — Voksenaasen',
+    id: 'weorder',
+    title: 'WeOrder/QuickOrder',
     description:
       'Custom-themed WeOrder client application, food ordering platform with 200+ custom client styling sets.',
     url: 'https://app.weorder.com/?app=voksenaasen',
@@ -495,7 +495,7 @@ export const CERTIFICATIONS = [
 // ─── Stats (Galactic Metrics) ───────────────
 
 export const STATS = [
-  { id: 'experience', label: 'Years of Force', value: 6, suffix: '+' },
+  { id: 'experience', label: 'Years of Force', value: 7, suffix: '+' },
   { id: 'projects', label: 'Missions Completed', value: 25, suffix: '+' },
   { id: 'clients', label: 'Allies Served', value: 15, suffix: '+' },
   { id: 'coffee', label: 'Cups of Caf', value: 12000, suffix: '+' },
