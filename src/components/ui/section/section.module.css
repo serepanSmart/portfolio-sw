@@ -13,7 +13,7 @@
   transform: translateY(0);
 }
 
-/* ─── Section Header — Cinematic SW style ── */
+/* ─── Section Header ─────────────────────── */
 
 .header {
   text-align: center;
@@ -24,21 +24,26 @@
   display: block;
   font-family: var(--font-body);
   font-size: var(--text-sm);
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-medium);
   letter-spacing: var(--tracking-mega);
   text-transform: uppercase;
   color: var(--color-accent-primary);
   margin-bottom: var(--space-3);
 }
 
+/* ─── Star Wars Outline Title ────────────── */
+
 .title {
   font-family: var(--font-starwars);
   font-size: var(--text-4xl);
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-wider);
-  color: var(--color-accent-primary);
-  text-shadow: var(--glow-text-yellow);
   margin-bottom: var(--space-6);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-accent-primary);
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 2px var(--color-accent-primary))
+    drop-shadow(0 0 10px var(--color-accent-primary-glow));
 }
 
 /* ─── Lightsaber Divider ─────────────────── */
@@ -73,5 +78,9 @@
 
   .header {
     margin-bottom: var(--space-10);
+  }
+
+  .title {
+    -webkit-text-stroke: 1px var(--color-accent-primary);
   }
 }
