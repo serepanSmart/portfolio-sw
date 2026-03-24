@@ -1,0 +1,323 @@
+/* ─── Filters ────────────────────────────── */
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: var(--space-2) var(--space-5);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: var(--border-thin) solid var(--color-border-primary);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.filterBtn:hover {
+  color: var(--color-accent-primary);
+  border-color: var(--color-border-accent);
+}
+
+.filterActive {
+  color: #000000;
+  background: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+}
+
+.filterActive:hover {
+  color: #000000;
+}
+
+/* ─── Grid ───────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
+}
+
+/* ─── Card ───────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: var(--border-thin) solid var(--color-border-primary);
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default);
+}
+
+.card:hover {
+  border-color: var(--color-border-accent);
+  transform: translateY(-3px);
+}
+
+/* ─── Image / Placeholder Wrapper ────────── */
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+/* ─── CSS Placeholder (Star Wars HUD) ──── */
+
+.placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  overflow: hidden;
+}
+
+.placeholderInitials {
+  font-family: var(--font-starwars);
+  font-size: var(--text-4xl);
+  color: var(--color-accent-primary);
+  opacity: 0.15;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: var(--tracking-wider);
+  z-index: 0;
+}
+
+.placeholderTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  opacity: 0.6;
+  text-align: center;
+  padding: 0 var(--space-6);
+  z-index: 1;
+  position: relative;
+}
+
+/* ─── Decorative grid lines (HUD feel) ─── */
+
+.gridLines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gridLineH {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-accent-primary);
+  opacity: 0.04;
+}
+
+.gridLineH:nth-child(1) {
+  top: 33%;
+}
+
+.gridLineH:nth-child(2) {
+  top: 66%;
+}
+
+.gridLineV {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-accent-primary);
+  opacity: 0.04;
+}
+
+.gridLineV:nth-child(3) {
+  left: 33%;
+}
+
+.gridLineV:nth-child(4) {
+  left: 66%;
+}
+
+/* ─── Corner brackets (targeting HUD) ──── */
+
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  z-index: 2;
+}
+
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: var(--color-accent-primary);
+  opacity: 0.2;
+}
+
+.cornerTL {
+  top: 12px;
+  left: 12px;
+}
+
+.cornerTL::before {
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 1px;
+}
+
+.cornerTL::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 16px;
+}
+
+.cornerTR {
+  top: 12px;
+  right: 12px;
+}
+
+.cornerTR::before {
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 1px;
+}
+
+.cornerTR::after {
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 16px;
+}
+
+.cornerBL {
+  bottom: 12px;
+  left: 12px;
+}
+
+.cornerBL::before {
+  bottom: 0;
+  left: 0;
+  width: 16px;
+  height: 1px;
+}
+
+.cornerBL::after {
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 16px;
+}
+
+.cornerBR {
+  bottom: 12px;
+  right: 12px;
+}
+
+.cornerBR::before {
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 1px;
+}
+
+.cornerBR::after {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 16px;
+}
+
+/* ─── Hover overlay ──────────────────────── */
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-overlay);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-default);
+}
+
+.card:hover .imageOverlay {
+  opacity: 1;
+}
+
+.viewText {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+}
+
+/* Card hover animates the placeholder */
+.card:hover .placeholderInitials {
+  opacity: 0.25;
+  transition: opacity var(--duration-base) var(--ease-default);
+}
+
+.card:hover .corner::before,
+.card:hover .corner::after {
+  opacity: 0.5;
+  transition: opacity var(--duration-base) var(--ease-default);
+}
+
+/* ─── Info ───────────────────────────────── */
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-heading);
+}
+
+.description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+/* ─── Responsive ─────────────────────────── */
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

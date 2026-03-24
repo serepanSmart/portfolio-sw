@@ -1,0 +1,233 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: var(--space-24) var(--space-6) var(--space-12);
+  text-align: center;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  animation: fadeIn 1.5s ease-out 3s both;
+}
+
+/* ─── "A long time ago..." intro ─────────── */
+
+.introWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: introFade 3s ease-out forwards;
+}
+
+.introText {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-regular);
+  color: var(--sw-blue);
+  white-space: nowrap;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ─── Star Wars Name Logo ────────────────── */
+
+.name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  line-height: 0.9;
+}
+
+.nameMain {
+  font-family: var(--font-starwars);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-regular);
+  color: var(--color-accent-primary);
+  text-shadow: var(--glow-text-yellow);
+  letter-spacing: var(--tracking-wider);
+  display: block;
+}
+
+/* ─── Crawl-style text block ─────────────── */
+
+.crawlWrapper {
+  max-width: 550px;
+  perspective: 300px;
+}
+
+.crawl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.crawlTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent-primary);
+}
+
+.crawlTagline {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-style: italic;
+  font-weight: var(--weight-light);
+  color: var(--color-accent-primary-dim);
+}
+
+.crawlBody {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* ─── CTA Buttons ────────────────────────── */
+
+.actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-8);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-wider);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-base) var(--ease-default),
+    color var(--duration-base) var(--ease-default),
+    box-shadow var(--duration-base) var(--ease-default);
+}
+
+.primaryBtn {
+  background: var(--color-accent-primary);
+  color: #000000;
+  border: none;
+}
+
+.primaryBtn:hover {
+  color: #000000;
+  box-shadow: var(--glow-yellow);
+}
+
+.secondaryBtn {
+  background: transparent;
+  color: var(--color-accent-primary);
+  border: var(--border-thin) solid var(--color-accent-primary);
+}
+
+.secondaryBtn:hover {
+  background: var(--color-accent-primary-muted);
+}
+
+/* ─── Social Links ───────────────────────── */
+
+.socials {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ─── Scroll Indicator ───────────────────── */
+
+.scrollIndicator {
+  position: absolute;
+  bottom: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+
+.scrollLine {
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--color-accent-primary), transparent);
+}
+
+/* ─── Animations ─────────────────────────── */
+
+@keyframes introFade {
+  0% {
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-20) var(--space-4) var(--space-12);
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .introText {
+    font-size: var(--text-base);
+    white-space: normal;
+    text-align: center;
+  }
+}

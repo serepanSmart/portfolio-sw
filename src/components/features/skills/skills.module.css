@@ -1,0 +1,46 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+
+.card {
+  padding: var(--space-8);
+  border: var(--border-thin) solid var(--color-border-primary);
+  transition: border-color var(--duration-base) var(--ease-default);
+}
+
+.card:hover {
+  border-color: var(--color-border-accent);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.icon {
+  font-size: var(--text-xl);
+  line-height: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-starwars);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent-primary);
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

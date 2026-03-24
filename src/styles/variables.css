@@ -1,0 +1,357 @@
+/* ============================================
+   src/styles/variables.css
+   STAR WARS THEME SYSTEM
+   
+   Real Star Wars visual identity:
+   - Yellow/Gold (#FFE81F) — THE iconic SW color
+   - Black/deep space — backgrounds
+   - Pathway Gothic One — tall narrow like crawl text
+   - Star Jedi font — the logo font (loaded locally)
+   - Minimal neon — SW is cinematic, not cyberpunk
+   ============================================ */
+
+/* ─── Star Jedi Font (Local) ─────────────────
+   Download "Star Jedi" from dafont.com and place in:
+   /public/fonts/star-jedi/StarJedi-DGRW.woff2
+   /public/fonts/star-jedi/StarJedi-DGRW.woff
+   
+   If fonts are not available, Pathway Gothic One
+   will be used as fallback.
+   ──────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Star Jedi';
+  src:
+    url('/fonts/star-jedi/StarJedi-DGRW.woff2') format('woff2'),
+    url('/fonts/star-jedi/StarJedi-DGRW.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ─── Font Families ─────────────────────── */
+  --font-starwars: 'Star Jedi', 'Pathway Gothic One', sans-serif;
+  --font-heading: 'Pathway Gothic One', 'Barlow', sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+
+  /* ─── Font Sizes (fluid) ───────────────── */
+  --text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+  --text-sm: clamp(0.85rem, 0.8rem + 0.25vw, 0.95rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+  --text-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+  --text-xl: clamp(1.35rem, 1.15rem + 1vw, 1.75rem);
+  --text-2xl: clamp(1.6rem, 1.3rem + 1.5vw, 2.25rem);
+  --text-3xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+  --text-4xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+  --text-5xl: clamp(3rem, 2.25rem + 3.75vw, 5.5rem);
+  --text-hero: clamp(4rem, 3rem + 5vw, 8rem);
+
+  /* ─── Font Weights ─────────────────────── */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ─── Line Heights ─────────────────────── */
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+
+  /* ─── Letter Spacing ───────────────────── */
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+  --tracking-widest: 0.15em;
+  --tracking-mega: 0.3em;
+
+  /* ─── Spacing ──────────────────────────── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ─── Layout ───────────────────────────── */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1400px;
+  --content-max: 800px;
+  --section-padding: var(--space-24);
+  --section-padding-mobile: var(--space-16);
+
+  /* ─── Border Radius ────────────────────── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-full: 9999px;
+
+  /* ─── Borders ──────────────────────────── */
+  --border-thin: 1px;
+  --border-medium: 2px;
+
+  /* ─── Transitions ──────────────────────── */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --duration-crawl: 1000ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-colors:
+    color var(--duration-base) var(--ease-default),
+    background-color var(--duration-base) var(--ease-default),
+    border-color var(--duration-base) var(--ease-default),
+    box-shadow var(--duration-base) var(--ease-default);
+  --transition-transform: transform var(--duration-base) var(--ease-default);
+  --transition-all: all var(--duration-base) var(--ease-default);
+
+  /* ─── Z-index ──────────────────────────── */
+  --z-base: 0;
+  --z-above: 10;
+  --z-nav: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-stars: -1;
+
+  /* ─── Breakpoints (reference) ──────────── */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1200px;
+}
+
+/* =============================================
+   DARK SIDE (Default)
+   Pure black space, yellow gold (#FFE81F),
+   subtle blue hologram tints, red lightsaber.
+   This is the ACTUAL Star Wars palette.
+   ============================================= */
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* ─── Star Wars Yellow ─────────────────── */
+  --sw-yellow: #ffe81f;
+  --sw-yellow-dim: #c4a700;
+  --sw-yellow-muted: rgb(255 232 31 / 0.1);
+  --sw-yellow-glow: rgb(255 232 31 / 0.3);
+
+  /* ─── Lightsaber Blue ──────────────────── */
+  --sw-blue: #4fa4e0;
+  --sw-blue-dim: #2a6a9e;
+  --sw-blue-muted: rgb(79 164 224 / 0.08);
+  --sw-blue-glow: rgb(79 164 224 / 0.2);
+
+  /* ─── Lightsaber Red ───────────────────── */
+  --sw-red: #e03030;
+  --sw-red-dim: #a02020;
+  --sw-red-muted: rgb(224 48 48 / 0.1);
+  --sw-red-glow: rgb(224 48 48 / 0.25);
+
+  /* ─── Lightsaber Green ─────────────────── */
+  --sw-green: #47c747;
+  --sw-green-muted: rgb(71 199 71 / 0.1);
+
+  /* ─── Backgrounds ──────────────────────── */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #050508;
+  --color-bg-tertiary: #0a0a0f;
+  --color-bg-card: rgb(255 255 255 / 0.02);
+  --color-bg-card-hover: rgb(255 255 255 / 0.04);
+  --color-bg-elevated: rgb(255 255 255 / 0.03);
+  --color-bg-input: rgb(255 255 255 / 0.03);
+
+  /* ─── Text ─────────────────────────────── */
+  --color-text-primary: #c8c8c8;
+  --color-text-secondary: #8a8a8a;
+  --color-text-tertiary: #5a5a5a;
+  --color-text-muted: #3a3a3a;
+  --color-text-inverse: #000000;
+  --color-text-heading: #e8e8e8;
+
+  /* ─── Semantic Accents ─────────────────── */
+  --color-accent-primary: var(--sw-yellow);
+  --color-accent-primary-dim: var(--sw-yellow-dim);
+  --color-accent-primary-muted: var(--sw-yellow-muted);
+  --color-accent-primary-glow: var(--sw-yellow-glow);
+  --color-accent-secondary: var(--sw-blue);
+  --color-accent-secondary-dim: var(--sw-blue-dim);
+  --color-accent-secondary-muted: var(--sw-blue-muted);
+  --color-accent-secondary-glow: var(--sw-blue-glow);
+  --color-accent-danger: var(--sw-red);
+  --color-accent-danger-muted: var(--sw-red-muted);
+  --color-accent-danger-glow: var(--sw-red-glow);
+
+  /* ─── Borders ──────────────────────────── */
+  --color-border-primary: rgb(255 255 255 / 0.06);
+  --color-border-secondary: rgb(255 255 255 / 0.03);
+  --color-border-accent: rgb(255 232 31 / 0.15);
+  --color-border-hover: rgb(255 232 31 / 0.3);
+
+  /* ─── Lightsaber Glows ─────────────────── */
+  --glow-yellow: 0 0 10px rgb(255 232 31 / 0.3), 0 0 30px rgb(255 232 31 / 0.1);
+  --glow-blue: 0 0 10px rgb(79 164 224 / 0.3), 0 0 30px rgb(79 164 224 / 0.1);
+  --glow-red: 0 0 10px rgb(224 48 48 / 0.3), 0 0 30px rgb(224 48 48 / 0.1);
+  --glow-text-yellow: 0 0 20px rgb(255 232 31 / 0.4);
+  --glow-text-blue: 0 0 15px rgb(79 164 224 / 0.3);
+
+  /* ─── Shadows ──────────────────────────── */
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 8px 30px rgb(0 0 0 / 0.5);
+
+  /* ─── Scrollbar ────────────────────────── */
+  --color-scrollbar-track: #000000;
+  --color-scrollbar-thumb: #222222;
+  --color-scrollbar-thumb-hover: #333333;
+
+  /* ─── Starfield ────────────────────────── */
+  --color-star: #ffffff;
+
+  /* ─── Overlay ──────────────────────────── */
+  --color-overlay: rgb(0 0 0 / 0.8);
+  --color-overlay-light: rgb(0 0 0 / 0.5);
+
+  /* ─── Skill Bar ────────────────────────── */
+  --color-skill-bg: rgb(255 255 255 / 0.04);
+  --color-skill-fill: linear-gradient(
+    90deg,
+    var(--sw-blue-dim),
+    var(--sw-blue)
+  );
+
+  /* ─── Nav ──────────────────────────────── */
+  --color-nav-bg: rgb(0 0 0 / 0.9);
+  --color-nav-border: rgb(255 232 31 / 0.08);
+
+  /* ─── Hologram effect ──────────────────── */
+  --hologram-scanline: rgb(79 164 224 / 0.03);
+  --hologram-border: rgb(79 164 224 / 0.12);
+  --hologram-bg: rgb(79 164 224 / 0.02);
+}
+
+/* =============================================
+   LIGHT SIDE
+   Warm parchment, Jedi temple stone,
+   muted gold, warm browns.
+   ============================================= */
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* ─── Star Wars Yellow (muted for light) ─ */
+  --sw-yellow: #8a6d00;
+  --sw-yellow-dim: #6b5400;
+  --sw-yellow-muted: rgb(138 109 0 / 0.08);
+  --sw-yellow-glow: rgb(138 109 0 / 0.15);
+
+  /* ─── Lightsaber Blue ──────────────────── */
+  --sw-blue: #2968a0;
+  --sw-blue-dim: #1a4a75;
+  --sw-blue-muted: rgb(41 104 160 / 0.06);
+  --sw-blue-glow: rgb(41 104 160 / 0.12);
+
+  /* ─── Lightsaber Red ───────────────────── */
+  --sw-red: #b02020;
+  --sw-red-dim: #801818;
+  --sw-red-muted: rgb(176 32 32 / 0.08);
+  --sw-red-glow: rgb(176 32 32 / 0.15);
+
+  /* ─── Lightsaber Green ─────────────────── */
+  --sw-green: #2a8a2a;
+  --sw-green-muted: rgb(42 138 42 / 0.08);
+
+  /* ─── Backgrounds ──────────────────────── */
+  --color-bg-primary: #f5f0e1;
+  --color-bg-secondary: #ece6d4;
+  --color-bg-tertiary: #e0d9c6;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #faf8f2;
+  --color-bg-elevated: #ffffff;
+  --color-bg-input: #ffffff;
+
+  /* ─── Text ─────────────────────────────── */
+  --color-text-primary: #2a2520;
+  --color-text-secondary: #5a5248;
+  --color-text-tertiary: #8a8070;
+  --color-text-muted: #b0a898;
+  --color-text-inverse: #f5f0e1;
+  --color-text-heading: #1a1510;
+
+  /* ─── Semantic Accents ─────────────────── */
+  --color-accent-primary: var(--sw-yellow);
+  --color-accent-primary-dim: var(--sw-yellow-dim);
+  --color-accent-primary-muted: var(--sw-yellow-muted);
+  --color-accent-primary-glow: var(--sw-yellow-glow);
+  --color-accent-secondary: var(--sw-blue);
+  --color-accent-secondary-dim: var(--sw-blue-dim);
+  --color-accent-secondary-muted: var(--sw-blue-muted);
+  --color-accent-secondary-glow: var(--sw-blue-glow);
+  --color-accent-danger: var(--sw-red);
+  --color-accent-danger-muted: var(--sw-red-muted);
+  --color-accent-danger-glow: var(--sw-red-glow);
+
+  /* ─── Borders ──────────────────────────── */
+  --color-border-primary: rgb(0 0 0 / 0.08);
+  --color-border-secondary: rgb(0 0 0 / 0.04);
+  --color-border-accent: rgb(138 109 0 / 0.15);
+  --color-border-hover: rgb(138 109 0 / 0.3);
+
+  /* ─── Glows (subtle in light) ──────────── */
+  --glow-yellow: 0 2px 8px rgb(138 109 0 / 0.1);
+  --glow-blue: 0 2px 8px rgb(41 104 160 / 0.1);
+  --glow-red: 0 2px 8px rgb(176 32 32 / 0.1);
+  --glow-text-yellow: none;
+  --glow-text-blue: none;
+
+  /* ─── Shadows ──────────────────────────── */
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.1);
+
+  /* ─── Scrollbar ────────────────────────── */
+  --color-scrollbar-track: #ece6d4;
+  --color-scrollbar-thumb: #c8c0b0;
+  --color-scrollbar-thumb-hover: #b0a898;
+
+  /* ─── Starfield ────────────────────────── */
+  --color-star: #c0b8a0;
+
+  /* ─── Overlay ──────────────────────────── */
+  --color-overlay: rgb(0 0 0 / 0.4);
+  --color-overlay-light: rgb(0 0 0 / 0.15);
+
+  /* ─── Skill Bar ────────────────────────── */
+  --color-skill-bg: rgb(0 0 0 / 0.05);
+  --color-skill-fill: linear-gradient(
+    90deg,
+    var(--sw-blue-dim),
+    var(--sw-blue)
+  );
+
+  /* ─── Nav ──────────────────────────────── */
+  --color-nav-bg: rgb(245 240 225 / 0.92);
+  --color-nav-border: rgb(0 0 0 / 0.06);
+
+  /* ─── Hologram ─────────────────────────── */
+  --hologram-scanline: transparent;
+  --hologram-border: rgb(0 0 0 / 0.08);
+  --hologram-bg: transparent;
+}

@@ -1,0 +1,207 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+/* ─── Client Card ────────────────────────── */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-4);
+  border: var(--border-thin) solid var(--color-border-primary);
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    border-color var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default);
+}
+
+.card:hover {
+  border-color: var(--color-border-accent);
+  transform: translateY(-3px);
+}
+
+/* ─── Corner Brackets (targeting HUD) ──── */
+
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-default);
+}
+
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: var(--color-accent-primary);
+}
+
+.tl {
+  top: 8px;
+  left: 8px;
+}
+
+.tl::before {
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 1px;
+}
+
+.tl::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 14px;
+}
+
+.tr {
+  top: 8px;
+  right: 8px;
+}
+
+.tr::before {
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 1px;
+}
+
+.tr::after {
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 14px;
+}
+
+.bl {
+  bottom: 8px;
+  left: 8px;
+}
+
+.bl::before {
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  height: 1px;
+}
+
+.bl::after {
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 14px;
+}
+
+.br {
+  bottom: 8px;
+  right: 8px;
+}
+
+.br::before {
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 1px;
+}
+
+.br::after {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 14px;
+}
+
+.card:hover .corner {
+  opacity: 0.5;
+}
+
+/* ─── Mini Lightsaber Accent ─────────────── */
+
+.saber {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition:
+    opacity var(--duration-slow) var(--ease-default),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.card:hover .saber {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.saberHilt {
+  width: 14px;
+  height: 6px;
+  background: linear-gradient(180deg, #a0a0a0, #606060);
+  border-radius: 1px 0 0 1px;
+  flex-shrink: 0;
+}
+
+.saberBlade {
+  width: 40px;
+  height: 2px;
+  background: var(--color-accent-primary);
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+  box-shadow: 0 0 6px var(--color-accent-primary-glow);
+}
+
+/* ─── Client Name ────────────────────────── */
+
+.name {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-align: center;
+  transition: color var(--duration-base) var(--ease-default);
+}
+
+.card:hover .name {
+  color: var(--color-accent-primary);
+}
+
+/* ─── Link Icon ──────────────────────────── */
+
+.linkIcon {
+  width: 12px;
+  height: 12px;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition:
+    opacity var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.card:hover .linkIcon {
+  opacity: 0.5;
+  transform: translate(0, 0);
+}
+
+/* ─── Responsive ─────────────────────────── */
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
