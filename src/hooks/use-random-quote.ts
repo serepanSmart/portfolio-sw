@@ -2,12 +2,7 @@ import { useState, useCallback } from 'react';
 
 import { SW_QUOTES } from '@/data';
 
-// ─── useRandomQuote ─────────────────────────
-// Returns a random Star Wars quote and a
-// function to shuffle to the next one.
-//
 // "Never tell me the odds." — Han Solo
-// ─────────────────────────────────────────────
 
 type Quote = {
   text: string;

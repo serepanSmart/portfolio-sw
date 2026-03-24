@@ -2,13 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import type { RefObject } from 'react';
 
-// ─── useIntersectionObserver ────────────────
-// Generic hook for triggering animations when
-// elements scroll into view. Returns a ref to
-// attach and a boolean for visibility state.
-//
 // "Your focus determines your reality." — Qui-Gon
-// ─────────────────────────────────────────────
 
 type UseIntersectionObserverOptions = {
   threshold?: number;

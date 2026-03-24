@@ -8,7 +8,7 @@ import '@/styles/reset.css';
 const STORAGE_KEY = 'sv-portfolio-theme';
 const DEFAULT_THEME = 'dark';
 
-function getInitialTheme(): string {
+const getInitialTheme = (): string => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
 
@@ -20,7 +20,7 @@ function getInitialTheme(): string {
   }
 
   return DEFAULT_THEME;
-}
+};
 
 document.documentElement.setAttribute('data-theme', getInitialTheme());
 

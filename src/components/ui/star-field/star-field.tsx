@@ -5,24 +5,16 @@ import { useTheme } from '@/hooks';
 
 import styles from './star-field.module.css';
 
-// ─── Star Types ─────────────────────────────
-
-type Star = {
+interface Star {
   x: number;
   y: number;
   z: number;
   prevZ: number;
   radius: number;
   opacity: number;
-};
+}
 
-// ─── Hyperspace StarField ───────────────────
-// Stars fly toward the viewer from a central
-// vanishing point — like the Millennium Falcon
-// jumping to hyperspace.
-//
 // "Punch it, Chewie!" — Han Solo
-// ─────────────────────────────────────────────
 
 const SPEED = 0.004;
 const MAX_DEPTH = 1000;

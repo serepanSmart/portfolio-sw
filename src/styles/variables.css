@@ -1,24 +1,3 @@
-/* ============================================
-   src/styles/variables.css
-   STAR WARS THEME SYSTEM
-   
-   Real Star Wars visual identity:
-   - Yellow/Gold (#FFE81F) — THE iconic SW color
-   - Black/deep space — backgrounds
-   - Pathway Gothic One — tall narrow like crawl text
-   - Star Jedi font — the logo font (loaded locally)
-   - Minimal neon — SW is cinematic, not cyberpunk
-   ============================================ */
-
-/* ─── Star Jedi Font (Local) ─────────────────
-   Download "Star Jedi" from dafont.com and place in:
-   /public/fonts/star-jedi/StarJedi-DGRW.woff2
-   /public/fonts/star-jedi/StarJedi-DGRW.woff
-   
-   If fonts are not available, Pathway Gothic One
-   will be used as fallback.
-   ──────────────────────────────────────────── */
-
 @font-face {
   font-family: 'Star Jedi';
   src:

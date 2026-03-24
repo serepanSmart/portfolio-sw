@@ -1,13 +1,7 @@
 import { useScrollToTop } from '@/hooks';
-
 import styles from './scroll-to-top.module.css';
 
-// ─── ScrollToTop ────────────────────────────
-// Floating action button — appears after scrolling.
-// Smooth scrolls to top on click.
-//
 // "Punch it, Chewie!" — Han Solo
-// ─────────────────────────────────────────────
 
 export const ScrollToTop = (): React.JSX.Element => {
   const { isVisible, scrollToTop } = useScrollToTop({

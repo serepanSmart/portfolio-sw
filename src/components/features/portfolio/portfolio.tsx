@@ -1,8 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
-
 import { PORTFOLIO_ITEMS, PORTFOLIO_FILTERS } from '@/data';
 import { Section, Badge } from '@/components/ui';
-
 import styles from './portfolio.module.css';
 
 const PLACEHOLDER_COLORS = [
@@ -76,8 +74,6 @@ const PortfolioImage = ({
     />
   );
 };
-
-// ─── Portfolio Section ──────────────────────
 
 export const Portfolio = (): React.JSX.Element => {
   const [activeFilter, setActiveFilter] = useState('all');
