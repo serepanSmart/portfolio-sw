@@ -1,31 +1,23 @@
-# 🌍 Tour Search Application
+# ⚔️ SERHII VOVNA — STAR WARS PORTFOLIO
 
-Client-side tour search service with the ability to search by country, city, or hotel.
+> "May the clean code be with you."
 
-🔗 **Live Demo:** https://tour-search-app-lilac.vercel.app/
+A personal developer portfolio themed after the Star Wars universe
 
----
+🔗 **Live Demo:** https://portfolio-sw-two.vercel.app/
 
-## 📋 Tasks
-
-1. ✅ **Search Form** - combobox with autocomplete for destination selection
-2. ✅ **Tour Search** - asynchronous search with polling, retry, and error handling
-3. ✅ **Render Results** - display tour cards with data aggregation (prices + hotels)
-4. ✅ **Cancel Search** - ability to change parameters during an active search
-
----
 
 ## 🚀 Quick Start
 
 ### Online
-Just open the [live demo](https://tour-search-app-lilac.vercel.app/)
+Just open the [live demo](https://portfolio-sw-two.vercel.app/)
 
 ### Local Development
 
 ```bash
 # Clone the repository
-git clone https://github.com/serepanSmart/tour-search-app.git
-cd tour-search-app
+git clone https://github.com/serepanSmart/portfolio-sw.git
+cd portfolio-sw
 
 # Install dependencies
 npm install
@@ -53,55 +45,96 @@ React 18
 TypeScript
 Vite
 Zustand
-TanStack
-@floating-ui/react
 CSS Modules
 
 ---
 
 📁 Project structure
 
-src/
-├── api/                    # API layer
-│   ├── api.js             # Mock API (provided)
-│   ├── tour-api.ts        # Tours API wrapper
-│   └── geo-api.ts         # Geo API wrapper
+portfolio-sw/
+├── index.html                         # Entry HTML + FOWT prevention script
+├── vite.config.ts                     # Vite + path aliases (@/)
+├── tsconfig.json                      # TS project references
+├── tsconfig.app.json                  # Strict app TS config
+├── eslint.config.js                   # Flat ESLint config
 │
-├── services/              # Business logic
-│   ├── search-service.ts        # Search with polling/retry
-│   ├── aggregation-service.ts   # Data aggregation + caching
-│   └── search-manager.ts        # Search orchestration + filtering
+├── public/
+│   ├── favicon.svg                    # Lightsaber + "SV" initials
+│   ├── fonts/star-jedi/               # Star Jedi .woff2 / .woff
+│   ├── icons/                         # SW character SVG icons
+│   └── images/portfolio/              # Project screenshots (.webp)
 │
-├── hooks/                 # React integration
-│   └── use-search-prices.ts
-│
-├── stores/                # UI state (Zustand)
-│   └── search-store.ts          # Form state (destination, inputValue)
-│
-├── queries/               # TanStack Query
-│   └── geo-queries.ts           # Countries & geo search queries
-│
-├── components/
-│   ├── ui/                      # Primitives
-│   │   ├── button/
-│   │   ├── input/
-│   │   ├── popover/
-│   │   ├── loader/
-│   │   ├── error-message/
-│   │   └── empty-state/
-│   │
-│   ├── composite/               # Composed components
-│   │   ├── combobox/           # Popover + Input
-│   │   └── geo-option/
-│   │
-│   └── features/                # Features
-│       ├── search-form/
-│       ├── search-results/
-│       └── tours-list/
-│
-├── models/                # TypeScript types
-│   └── geo-types.ts
-│
-└── styles/                # Global styles
-    ├── reset.css
-    └── variables.css
+└── src/
+    ├── App.tsx                        # Root layout + React.lazy sections
+    ├── app.module.css                 # Root layout styles
+    ├── data.ts                        # All portfolio data & content
+    ├── main.tsx                       # Entry + synchronous theme init
+    │
+    ├── components/
+    │   ├── features/                  # Page sections
+    │   │   ├── header/                #   Fixed nav + saber/death star toggle
+    │   │   ├── hero/                  #   "A long time ago..." + SW logo name
+    │   │   ├── about/                 #   Bio + Jedi Traits (SW icons) + Stats
+    │   │   ├── skills/                #   Grouped animated skill bars
+    │   │   ├── experience/            #   Timeline with mission log cards
+    │   │   ├── clients/               #   Allied Forces grid + saber accents
+    │   │   ├── portfolio/             #   Filterable projects + HUD placeholders
+    │   │   ├── certifications/        #   Holocron certification badges
+    │   │   ├── contact/               #   Formspree form + contact details
+    │   │   └── footer/                #   Random SW quotes + social links
+    │   │
+    │   └── ui/                        # Reusable components
+    │       ├── star-field/            #   Hyperspace canvas animation
+    │       ├── section/               #   SW-titled section wrapper
+    │       ├── loader/                #   Lightsaber ignite loading animation
+    │       ├── scroll-to-top/         #   FAB button
+    │       ├── badge/                 #   Tech tag pills
+    │       ├── skill-bar/             #   Animated progress bars
+    │       └── social-icon/           #   Inline SVG social icons
+    │
+    ├── hooks/
+    │   ├── use-theme.ts               # Theme convenience wrapper
+    │   ├── use-scroll-spy.ts          # Active nav section tracking
+    │   ├── use-intersection-observer.ts # Scroll-triggered reveal animations
+    │   ├── use-scroll-to-top.ts       # FAB visibility + scroll action
+    │   └── use-random-quote.ts        # Random Star Wars quote picker
+    │
+    ├── models/
+    │   ├── portfolio.ts               # Domain types
+    │   ├── theme.ts                   # Theme types
+    │   └── ids.ts                     # Derived literal union types
+    │
+    ├── stores/
+    │   └── theme-store.ts             # Zustand dark/light + localStorage
+    │
+    └── styles/
+        ├── variables.css              # CSS custom properties + theme tokens
+        └── reset.css                  # Modern CSS reset + SW defaults
+
+
+⚡ Features
+🌑 Dark Side / ☀️ Light Side Toggle
+Theme managed by Zustand store with localStorage persistence. Zero FOWT (Flash of Wrong Theme) — an inline script in the HTML head reads stored preference synchronously before first paint. Theme applied via data-theme attribute on the html element — all CSS custom properties swap automatically. Toggle button shows a Lightsaber SVG in dark mode and a Death Star SVG in light mode.
+
+
+🚀 Hyperspace Starfield
+HTML5 Canvas with 200 stars using 3D→2D perspective projection. Stars fly from a central vanishing point toward the viewer. Motion streaks are drawn from each star's previous position to current position. Semi-transparent frame clearing creates natural motion blur. In light mode, stars render as subtle static dots. Uses requestAnimationFrame for smooth 60fps.
+
+
+🎬 Opening Sequence
+"A long time ago in a galaxy far, far away...." fades in (blue text)
+Text fades out after 3 seconds
+serhii vovna reveals with Star Wars border lines + Star Jedi font
+Subtitle, tagline, CTA buttons, and social links fade up
+
+📡 Working Contact Form
+Powered by @formspree/react with the useForm hook. Per-field validation via ValidationError component. Loading, success, and error states handled automatically. No backend required — works on any static hosting.
+
+
+♿ Accessibility
+Semantic HTML (section, nav, header, main, footer)
+aria-label, aria-hidden, aria-expanded attributes throughout
+:focus-visible keyboard navigation styles
+prefers-reduced-motion media query disables all animations
+.sr-only screen reader utility class
+noscript fallback with contact info and links
