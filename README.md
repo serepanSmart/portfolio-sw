@@ -3,6 +3,9 @@
 > "May the clean code be with you."
 
 A personal developer portfolio themed after the Star Wars universe
+with C3PO AI assistant who can provide all reqired info about me <img width="54" height="100" alt="Screenshot 2026-03-26 at 17 08 20" src="https://github.com/user-attachments/assets/86e59825-4612-4d08-99ea-96e03e3dccee" />
+
+
 
 🔗 **Live Demo:** https://portfolio-sw-two.vercel.app/
 
