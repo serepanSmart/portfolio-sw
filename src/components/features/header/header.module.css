@@ -22,7 +22,6 @@
 
 .logo {
   text-decoration: none;
-  color: var(--color-accent-primary);
 }
 
 .logoText {
@@ -30,8 +29,10 @@
   font-size: var(--text-sm);
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-wider);
-  color: var(--color-accent-primary);
-  text-shadow: var(--glow-text-yellow);
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-accent-primary);
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 8px var(--color-accent-primary-glow));
 }
 
 /* ─── Desktop Nav ────────────────────────── */

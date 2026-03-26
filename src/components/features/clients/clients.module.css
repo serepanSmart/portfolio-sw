@@ -23,11 +23,11 @@
 }
 
 .card:hover {
-  border-color: var(--color-border-accent);
+  border-color: var(--saber-color, var(--color-border-accent));
   transform: translateY(-3px);
 }
 
-/* ─── Corner Brackets (targeting HUD) ──── */
+/* ─── Corner Brackets ────────────────────── */
 
 .corner {
   position: absolute;
@@ -42,7 +42,7 @@
 .corner::after {
   content: '';
   position: absolute;
-  background: var(--color-accent-primary);
+  background: var(--saber-color, var(--color-accent-primary));
 }
 
 .tl {
@@ -122,10 +122,10 @@
 }
 
 .card:hover .corner {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
-/* ─── Mini Lightsaber Accent ─────────────── */
+/* ─── Mini Lightsaber ────────────────────── */
 
 .saber {
   display: flex;
@@ -155,9 +155,11 @@
 .saberBlade {
   width: 40px;
   height: 2px;
-  background: var(--color-accent-primary);
+  background: var(--saber-color, var(--color-accent-primary));
   border-radius: 0 var(--radius-full) var(--radius-full) 0;
-  box-shadow: 0 0 6px var(--color-accent-primary-glow);
+  box-shadow:
+    0 0 6px var(--saber-glow, var(--color-accent-primary-glow)),
+    0 0 12px var(--saber-glow, var(--color-accent-primary-glow));
 }
 
 /* ─── Client Name ────────────────────────── */
@@ -174,7 +176,7 @@
 }
 
 .card:hover .name {
-  color: var(--color-accent-primary);
+  color: var(--saber-color, var(--color-accent-primary));
 }
 
 /* ─── Link Icon ──────────────────────────── */
@@ -196,6 +198,94 @@
 .card:hover .linkIcon {
   opacity: 0.5;
   transform: translate(0, 0);
+  color: var(--saber-color, var(--color-text-muted));
+}
+
+/* ─── Show More/Less Toggle ──────────────── */
+
+.toggleWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-10);
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  background: transparent;
+  border: var(--border-thin) solid var(--color-border-primary);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default);
+}
+
+.toggleBtn:hover {
+  border-color: var(--color-border-accent);
+  transform: translateY(-2px);
+}
+
+/* ─── Button Lightsabers ─────────────────── */
+
+.btnSaber {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.btnHilt {
+  width: 12px;
+  height: 6px;
+  background: linear-gradient(180deg, #a0a0a0, #606060);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.btnBladeLeft {
+  width: 0;
+  height: 2px;
+  background: var(--sw-blue);
+  border-radius: var(--radius-full) 0 0 var(--radius-full);
+  box-shadow:
+    0 0 6px rgba(79, 164, 224, 0.4),
+    0 0 12px rgba(79, 164, 224, 0.2);
+  transition: width var(--duration-slow) var(--ease-out);
+}
+
+.btnBladeRight {
+  width: 0;
+  height: 2px;
+  background: var(--sw-red);
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+  box-shadow:
+    0 0 6px rgba(224, 48, 48, 0.4),
+    0 0 12px rgba(224, 48, 48, 0.2);
+  transition: width var(--duration-slow) var(--ease-out);
+}
+
+.toggleBtn:hover .btnBladeLeft {
+  width: 30px;
+}
+
+.toggleBtn:hover .btnBladeRight {
+  width: 30px;
+}
+
+/* ─── Button Text ────────────────────────── */
+
+.btnText {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  transition: color var(--duration-base) var(--ease-default);
+}
+
+.toggleBtn:hover .btnText {
+  color: var(--color-accent-primary);
 }
 
 /* ─── Responsive ─────────────────────────── */
@@ -203,5 +293,14 @@
 @media (max-width: 480px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .btnBladeLeft,
+  .btnBladeRight {
+    display: none;
+  }
+
+  .toggleBtn {
+    gap: var(--space-2);
   }
 }

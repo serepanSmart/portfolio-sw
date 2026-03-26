@@ -135,7 +135,11 @@ export const Header = (): React.JSX.Element => {
       <nav className={styles.nav}>
         <a href="#hero" className={styles.logo} aria-label="Home">
           <span className={styles.logoText}>
-            {PERSONAL_INFO.name.toLowerCase()}
+            {PERSONAL_INFO.name
+              .toLowerCase()
+              .split(' ')
+              .map((n) => n[0])
+              .join('')}
           </span>
         </a>
 
