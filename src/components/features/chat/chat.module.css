@@ -1,13 +1,6 @@
-/* ═══════════════════════════════════════════
-   C-3PO HOLOGRAM CHAT
-   "Help me, Obi-Wan Kenobi..."
-   ═══════════════════════════════════════════ */
-
-/* ─── C-3PO Floating Trigger ─────────────── */
-
 .trigger {
   position: fixed;
-  bottom: var(--space-6);
+  bottom: var(--space-4);
   left: var(--space-6);
   z-index: var(--z-overlay);
   display: flex;
@@ -32,15 +25,15 @@
   transform: scale(0.8) translateY(20px);
 }
 
-/* ─── c3po-D2 Image ────────────────────────── */
-
 .c3poWrapper {
-  width: 70px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 .c3poImage {
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   transform: translateX(-10px);
   filter: drop-shadow(0 0 6px rgba(79, 164, 224, 0.3))
     drop-shadow(0 0 12px rgba(79, 164, 224, 0.1));
@@ -51,8 +44,6 @@
   filter: drop-shadow(0 0 10px rgba(79, 164, 224, 0.5))
     drop-shadow(0 0 25px rgba(79, 164, 224, 0.2));
 }
-
-/* ─── Blue Glow Pool Under c3po ────────────── */
 
 .c3poGlow {
   position: absolute;
@@ -84,12 +75,10 @@
   }
 }
 
-/* ─── Hologram Beam (projects upward) ────── */
-
 .holoBeam {
   position: absolute;
-  bottom: 58px;
-  left: 52%;
+  bottom: 68px;
+  left: 55%;
   transform: translateX(-50%);
   width: 40px;
   height: 50px;
@@ -129,7 +118,7 @@
 
 .holoText {
   position: absolute;
-  bottom: 100px;
+  bottom: 118px;
   left: 55%;
   pointer-events: none;
   opacity: 0;
@@ -180,27 +169,17 @@
   }
 }
 
-/* ═══════════════════════════════════════════
-   CHAT PANEL — Hologram Projector Style
-   ═══════════════════════════════════════════ */
-
 .panel {
   position: fixed;
-  bottom: var(--space-8);
-  left: var(--space-8);
+  bottom: var(--space-4);
+  left: var(--space-6);
   z-index: var(--z-overlay);
-  width: 380px;
-  height: 520px;
+  width: 400px;
+  height: 460px;
   display: flex;
   flex-direction: column;
-  background: rgba(0, 6, 18, 0.93);
-  border: var(--border-thin) solid rgba(79, 164, 224, 0.2);
-  border-radius: var(--radius-lg);
+  background: rgba(0, 6, 18, 0.88);
   overflow: hidden;
-  box-shadow:
-    0 0 20px rgba(79, 164, 224, 0.1),
-    0 0 60px rgba(79, 164, 224, 0.04),
-    inset 0 0 40px rgba(79, 164, 224, 0.02);
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px) scale(0.95);
@@ -209,12 +188,32 @@
     opacity var(--duration-slow) var(--ease-default),
     visibility var(--duration-slow) var(--ease-default),
     transform var(--duration-slow) var(--ease-out);
+
+  /* Trapezoid: wide top, narrow bottom like hologram beam */
+  clip-path: polygon(0% 0%, 100% 0%, 92% 85%, 80% 100%, 20% 100%, 8% 85%);
+
+  /* Glow effect via box-shadow won't work with clip-path,
+     so we use filter instead */
+  filter: drop-shadow(0 0 15px rgba(79, 164, 224, 0.12))
+    drop-shadow(0 0 40px rgba(79, 164, 224, 0.05));
 }
 
 .panelOpen {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
+}
+
+/* ─── Inner border that follows the trapezoid ── */
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  clip-path: polygon(0% 0%, 100% 0%, 92% 85%, 80% 100%, 20% 100%, 8% 85%);
+  border: 1px solid rgba(79, 164, 224, 0.2);
+  pointer-events: none;
+  z-index: 4;
 }
 
 /* ─── Scanline Overlay ───────────────────── */
@@ -279,13 +278,28 @@
   }
 }
 
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(
+    180deg,
+    rgba(79, 164, 224, 0.08) 0%,
+    transparent 10%,
+    transparent 90%,
+    rgba(79, 164, 224, 0.05) 100%
+  );
+}
+
 /* ─── Header ─────────────────────────────── */
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-5);
   border-bottom: var(--border-thin) solid rgba(79, 164, 224, 0.1);
   background: rgba(79, 164, 224, 0.03);
   position: relative;
@@ -356,7 +370,7 @@
 .messages {
   flex: 1;
   overflow-y: auto;
-  padding: var(--space-4);
+  padding: var(--space-4) var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -378,8 +392,6 @@
   background: rgba(79, 164, 224, 0.15);
   border-radius: var(--radius-full);
 }
-
-/* ─── Message Row ────────────────────────── */
 
 .message {
   display: flex;
@@ -499,7 +511,9 @@
 .inputForm {
   display: flex;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-8);
+  padding-bottom: var(--space-10);
+  padding-left: 55px;
   border-top: var(--border-thin) solid rgba(79, 164, 224, 0.08);
   background: rgba(0, 6, 18, 0.5);
   position: relative;
@@ -535,8 +549,6 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
-
-/* ─── Send Button ────────────────────────── */
 
 .sendBtn {
   display: flex;
@@ -584,7 +596,7 @@
 
 @media (max-width: 480px) {
   .trigger {
-    bottom: var(--space-4);
+    bottom: var(--space-2);
     left: var(--space-4);
   }
 
@@ -609,14 +621,24 @@
     right: 0;
     width: 100%;
     height: 100dvh;
+    clip-path: none;
     border-radius: 0;
     transform-origin: bottom center;
+  }
+
+  .panel::before {
+    clip-path: none;
+  }
+
+  .inputForm {
+    padding: var(--space-3) var(--space-4);
+    padding-bottom: var(--space-4);
   }
 }
 
 @media (max-width: 768px) {
   .panel {
-    width: 340px;
-    height: 480px;
+    width: 360px;
+    height: 500px;
   }
 }
