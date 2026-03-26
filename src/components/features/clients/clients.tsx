@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { CLIENTS } from '@/data';
 import { Section } from '@/components/ui';
 import styles from './clients.module.css';
