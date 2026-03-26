@@ -27,3 +27,5 @@ export type {
   SkillCategoryId,
   PortfolioFilterId,
 } from './ids';
+
+export type { ChatMessage } from './chat';

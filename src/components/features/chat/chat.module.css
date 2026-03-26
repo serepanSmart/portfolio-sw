@@ -1,0 +1,622 @@
+/* ═══════════════════════════════════════════
+   C-3PO HOLOGRAM CHAT
+   "Help me, Obi-Wan Kenobi..."
+   ═══════════════════════════════════════════ */
+
+/* ─── C-3PO Floating Trigger ─────────────── */
+
+.trigger {
+  position: fixed;
+  bottom: var(--space-6);
+  left: var(--space-6);
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    opacity var(--duration-base) var(--ease-default),
+    transform var(--duration-base) var(--ease-default);
+}
+
+.trigger:hover {
+  transform: translateY(-4px);
+}
+
+.triggerHidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8) translateY(20px);
+}
+
+/* ─── c3po-D2 Image ────────────────────────── */
+
+.c3poWrapper {
+  width: 70px;
+  height: 60px;
+}
+
+.c3poImage {
+  object-fit: cover;
+  transform: translateX(-10px);
+  filter: drop-shadow(0 0 6px rgba(79, 164, 224, 0.3))
+    drop-shadow(0 0 12px rgba(79, 164, 224, 0.1));
+  transition: filter var(--duration-base) var(--ease-default);
+}
+
+.trigger:hover .c3poImage {
+  filter: drop-shadow(0 0 10px rgba(79, 164, 224, 0.5))
+    drop-shadow(0 0 25px rgba(79, 164, 224, 0.2));
+}
+
+/* ─── Blue Glow Pool Under c3po ────────────── */
+
+.c3poGlow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 10px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(79, 164, 224, 0.35) 0%,
+    rgba(79, 164, 224, 0.1) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1.3);
+  }
+}
+
+/* ─── Hologram Beam (projects upward) ────── */
+
+.holoBeam {
+  position: absolute;
+  bottom: 58px;
+  left: 52%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 50px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-slow) var(--ease-default);
+}
+
+.trigger:hover .holoBeam {
+  opacity: 1;
+}
+
+.holoBeamInner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(79, 164, 224, 0.15) 0%,
+    rgba(79, 164, 224, 0.05) 40%,
+    transparent 100%
+  );
+  clip-path: polygon(30% 100%, 70% 100%, 100% 0%, 0% 0%);
+  animation: beamFlicker 0.12s ease-in-out infinite alternate;
+}
+
+@keyframes beamFlicker {
+  0% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ─── Hologram Floating Text ─────────────── */
+
+.holoText {
+  position: absolute;
+  bottom: 100px;
+  left: 55%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+  transition:
+    opacity var(--duration-slow) var(--ease-default),
+    transform var(--duration-slow) var(--ease-default);
+}
+
+.trigger:hover .holoText {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.holoTextInner {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: rgba(79, 164, 224, 0.75);
+  white-space: nowrap;
+  text-shadow:
+    0 0 8px rgba(79, 164, 224, 0.4),
+    0 0 20px rgba(79, 164, 224, 0.15);
+  animation: holoTextFlicker 4s ease-in-out infinite;
+}
+
+@keyframes holoTextFlicker {
+  0%,
+  88%,
+  92%,
+  95%,
+  97%,
+  100% {
+    opacity: 1;
+  }
+
+  89% {
+    opacity: 0.3;
+  }
+
+  93% {
+    opacity: 0.7;
+  }
+
+  96% {
+    opacity: 0.2;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CHAT PANEL — Hologram Projector Style
+   ═══════════════════════════════════════════ */
+
+.panel {
+  position: fixed;
+  bottom: var(--space-8);
+  left: var(--space-8);
+  z-index: var(--z-overlay);
+  width: 380px;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 6, 18, 0.93);
+  border: var(--border-thin) solid rgba(79, 164, 224, 0.2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(79, 164, 224, 0.1),
+    0 0 60px rgba(79, 164, 224, 0.04),
+    inset 0 0 40px rgba(79, 164, 224, 0.02);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transform-origin: bottom left;
+  transition:
+    opacity var(--duration-slow) var(--ease-default),
+    visibility var(--duration-slow) var(--ease-default),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.panelOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* ─── Scanline Overlay ───────────────────── */
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(79, 164, 224, 0.01) 3px,
+    rgba(79, 164, 224, 0.01) 6px
+  );
+  animation: scanlineScroll 8s linear infinite;
+}
+
+@keyframes scanlineScroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 60px;
+  }
+}
+
+/* ─── Hologram Flicker ───────────────────── */
+
+.flicker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  background: rgba(79, 164, 224, 0.02);
+  animation: panelFlicker 6s ease-in-out infinite;
+}
+
+@keyframes panelFlicker {
+  0%,
+  91%,
+  93.5%,
+  95%,
+  97%,
+  100% {
+    opacity: 0;
+  }
+
+  92% {
+    opacity: 1;
+  }
+
+  94% {
+    opacity: 0.4;
+  }
+
+  96% {
+    opacity: 0.8;
+  }
+}
+
+/* ─── Header ─────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-thin) solid rgba(79, 164, 224, 0.1);
+  background: rgba(79, 164, 224, 0.03);
+  position: relative;
+  z-index: 3;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.headerDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--sw-blue);
+  box-shadow: 0 0 6px var(--sw-blue);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.headerTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--sw-blue);
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-default),
+    transform var(--duration-fast) var(--ease-default);
+}
+
+.closeBtn:hover {
+  color: var(--sw-red);
+  transform: rotate(90deg);
+}
+
+.closeIcon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── Messages Area ──────────────────────── */
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+  z-index: 3;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(79, 164, 224, 0.15) transparent;
+}
+
+.messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: rgba(79, 164, 224, 0.15);
+  border-radius: var(--radius-full);
+}
+
+/* ─── Message Row ────────────────────────── */
+
+.message {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  animation: messageIn 0.3s var(--ease-out) forwards;
+  opacity: 0;
+}
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.messageUser {
+  justify-content: flex-end;
+}
+
+.messageAi {
+  justify-content: flex-start;
+}
+
+/* ─── Avatar ─────────────────────────────── */
+
+.messageAvatar {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  color: var(--sw-blue);
+  border: var(--border-thin) solid rgba(79, 164, 224, 0.15);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ─── Message Bubbles ────────────────────── */
+
+.messageBubble {
+  max-width: 80%;
+  padding: var(--space-3);
+}
+
+.bubbleAi {
+  background: rgba(79, 164, 224, 0.04);
+  border: var(--border-thin) solid rgba(79, 164, 224, 0.08);
+  border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 2px;
+}
+
+.bubbleUser {
+  background: rgba(255, 232, 31, 0.04);
+  border: var(--border-thin) solid rgba(255, 232, 31, 0.08);
+  border-radius: var(--radius-md) var(--radius-md) 2px var(--radius-md);
+}
+
+.messageText {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+}
+
+.bubbleAi .messageText {
+  color: rgba(170, 205, 235, 0.85);
+}
+
+/* ─── Typing Indicator ───────────────────── */
+
+.typing {
+  display: flex;
+  gap: 5px;
+  padding: var(--space-1) 0;
+}
+
+.typingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--sw-blue);
+  opacity: 0.3;
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+
+.typingDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+/* ─── Input Form ─────────────────────────── */
+
+.inputForm {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: var(--border-thin) solid rgba(79, 164, 224, 0.08);
+  background: rgba(0, 6, 18, 0.5);
+  position: relative;
+  z-index: 3;
+}
+
+.input {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: rgba(79, 164, 224, 0.03);
+  border: var(--border-thin) solid rgba(79, 164, 224, 0.08);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+
+.input::placeholder {
+  color: rgba(79, 164, 224, 0.25);
+  font-style: italic;
+}
+
+.input:focus {
+  border-color: rgba(79, 164, 224, 0.4);
+  box-shadow: 0 0 8px rgba(79, 164, 224, 0.1);
+  outline: none;
+}
+
+.input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── Send Button ────────────────────────── */
+
+.sendBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: var(--border-thin) solid rgba(79, 164, 224, 0.15);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--sw-blue);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default),
+    transform var(--duration-fast) var(--ease-default);
+}
+
+.sendBtn:hover:not(:disabled) {
+  background: rgba(79, 164, 224, 0.08);
+  border-color: rgba(79, 164, 224, 0.3);
+  box-shadow: 0 0 8px rgba(79, 164, 224, 0.15);
+  transform: translateY(-1px);
+}
+
+.sendBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.sendBtn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.sendIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .trigger {
+    bottom: var(--space-4);
+    left: var(--space-4);
+  }
+
+  .c3poWrapper {
+    width: 64px;
+    height: 64px;
+  }
+
+  .c3poImage {
+    width: 64px;
+    height: 64px;
+  }
+
+  .holoBeam,
+  .holoText {
+    display: none;
+  }
+
+  .panel {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+    transform-origin: bottom center;
+  }
+}
+
+@media (max-width: 768px) {
+  .panel {
+    width: 340px;
+    height: 480px;
+  }
+}

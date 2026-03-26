@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { Chat } from '@/components/features/chat/chat';
 import { Header } from '@/components/features/header/header';
 import { Hero } from '@/components/features/hero/hero';
 import { Footer } from '@/components/features/footer/footer';
@@ -67,5 +68,6 @@ export const App = (): React.JSX.Element => (
     </main>
     <Footer />
     <ScrollToTop />
+    <Chat />
   </div>
 );
