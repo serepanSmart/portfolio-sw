@@ -15,14 +15,6 @@ npm run type-check   # tsc --noEmit (no emit, just type errors)
 npm run preview      # Preview production build
 ```
 
-No test runner is configured.
-
-## Environment
-
-```
-VITE_GROQ_API_KEY    # Required for AI chat feature; feature degrades gracefully without it
-```
-
 ## Architecture
 
 **React 19 + TypeScript + Vite portfolio site with a Star Wars theme.**
