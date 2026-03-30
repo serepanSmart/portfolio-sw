@@ -1,16 +1,12 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import { SW_QUOTES } from '@/data';
+import type { SWQuote } from '@/models';
 
 // "Never tell me the odds." — Han Solo
 
-type Quote = {
-  text: string;
-  author: string;
-};
-
 type UseRandomQuoteReturn = {
-  quote: Quote;
+  quote: SWQuote;
   nextQuote: () => void;
 };
 
@@ -33,9 +29,9 @@ export function useRandomQuote(): UseRandomQuoteReturn {
     Math.floor(Math.random() * SW_QUOTES.length)
   );
 
-  const nextQuote = useCallback((): void => {
+  const nextQuote = (): void => {
     setIndex((prev) => getRandomIndex(prev));
-  }, []);
+  };
 
   return {
     quote: {

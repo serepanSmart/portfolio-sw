@@ -1,6 +1,7 @@
 import Groq from 'groq-sdk';
 
 const API_KEY = import.meta.env.VITE_GROQ_API_KEY ?? '';
+const CHAT_MODEL = 'llama-3.3-70b-versatile';
 
 const SYSTEM_PROMPT = [
   'You are the Jedi Council Holocron, an ancient AI artifact with all knowledge about Serhii Vovna, a Senior Frontend Developer.',
@@ -91,7 +92,7 @@ const sendMessage = async (message: string): Promise<string> => {
 
   try {
     const response = await client.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: CHAT_MODEL,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...conversationHistory,

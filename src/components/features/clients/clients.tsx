@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CLIENTS } from '@/data';
 import { Section } from '@/components/ui';
 import styles from './clients.module.css';
@@ -31,14 +31,15 @@ const shuffleColors = (count: number): (typeof SABER_COLORS)[number][] => {
   return result;
 };
 
+const hasMore = CLIENTS.length > INITIAL_COUNT;
+
 export const Clients = (): React.JSX.Element => {
   const [showAll, setShowAll] = useState(false);
 
-  const colors = shuffleColors(CLIENTS.length);
+  const colors = useMemo(() => shuffleColors(CLIENTS.length), []);
   const handleToggle = (): void => setShowAll((prev) => !prev);
 
   const visibleClients = showAll ? CLIENTS : CLIENTS.slice(0, INITIAL_COUNT);
-  const hasMore = CLIENTS.length > INITIAL_COUNT;
 
   return (
     <Section id="clients">

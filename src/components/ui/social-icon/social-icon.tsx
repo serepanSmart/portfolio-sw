@@ -24,13 +24,12 @@ const getIconPath = (icon: string): string => {
   }
 };
 
-export function SocialIcon({
+export const SocialIcon = ({
   icon,
   url,
   label,
   className = '',
-}: SocialIconProps): React.JSX.Element {
-  return (
+}: SocialIconProps): React.JSX.Element => (
     <a
       href={url}
       target="_blank"
@@ -48,5 +47,4 @@ export function SocialIcon({
         <path d={getIconPath(icon)} />
       </svg>
     </a>
-  );
-}
+);

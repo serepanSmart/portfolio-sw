@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 // "Punch it, Chewie!" — Han Solo
 
@@ -39,12 +39,12 @@ export function useScrollToTop(
     };
   }, [visibilityThreshold]);
 
-  const scrollToTop = useCallback((): void => {
+  const scrollToTop = (): void => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  }, []);
+  };
 
   return { isVisible, scrollToTop };
 }

@@ -2,6 +2,8 @@
 // "Do. Or do not. There is no try." — Yoda
 // ============================================
 
+import type { ExperienceEntry } from './models';
+
 // ─── Navigation ─────────────────────────────
 
 export const NAV_ITEMS = [
@@ -142,7 +144,7 @@ export const SKILL_CATEGORIES = [
 
 // ─── Work Experience (Missions) ─────────────
 
-export const EXPERIENCE = [
+export const EXPERIENCE: readonly ExperienceEntry[] = [
   {
     id: 'epam-lead-2',
     company: 'EPAM Systems',

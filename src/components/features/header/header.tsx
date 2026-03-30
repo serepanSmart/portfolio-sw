@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import { NAV_ITEMS, PERSONAL_INFO } from '@/data';
 import { useTheme, useScrollSpy } from '@/hooks';
@@ -108,27 +108,24 @@ export const Header = (): React.JSX.Element => {
   const { activeSection } = useScrollSpy({ offset: 80 });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleNavClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string): void => {
-      e.preventDefault();
-      const element = document.getElementById(sectionId);
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string): void => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
 
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
 
-      setIsMobileMenuOpen(false);
-    },
-    []
-  );
-
-  const handleToggleMobile = useCallback((): void => {
-    setIsMobileMenuOpen((prev) => !prev);
-  }, []);
-
-  const handleCloseMobile = useCallback((): void => {
     setIsMobileMenuOpen(false);
-  }, []);
+  };
+
+  const handleToggleMobile = (): void => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const handleCloseMobile = (): void => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className={styles.header}>

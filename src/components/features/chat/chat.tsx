@@ -70,7 +70,7 @@ export const Chat = (): React.JSX.Element => {
         content: response,
       };
 
-      setMessages((prev: ChatMessage[]) => [...prev, aiMessage]);
+      setMessages((prev) => [...prev, aiMessage]);
       setIsTyping(false);
     });
   };

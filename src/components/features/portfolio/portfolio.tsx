@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState } from 'react';
 import { PORTFOLIO_ITEMS, PORTFOLIO_FILTERS } from '@/data';
 import { Section, Badge } from '@/components/ui';
 import styles from './portfolio.module.css';
@@ -36,9 +36,9 @@ const PortfolioImage = ({
 }: PortfolioImageProps): React.JSX.Element => {
   const [hasError, setHasError] = useState(false);
 
-  const handleError = useCallback((): void => {
+  const handleError = (): void => {
     setHasError(true);
-  }, []);
+  };
 
   if (hasError) {
     return (
@@ -78,17 +78,14 @@ const PortfolioImage = ({
 export const Portfolio = (): React.JSX.Element => {
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const handleFilterClick = useCallback((filterId: string): void => {
+  const handleFilterClick = (filterId: string): void => {
     setActiveFilter(filterId);
-  }, []);
+  };
 
-  const filteredItems = useMemo(
-    () =>
-      activeFilter === 'all'
-        ? PORTFOLIO_ITEMS
-        : PORTFOLIO_ITEMS.filter((item) => item.filter === activeFilter),
-    [activeFilter]
-  );
+  const filteredItems =
+    activeFilter === 'all'
+      ? PORTFOLIO_ITEMS
+      : PORTFOLIO_ITEMS.filter((item) => item.filter === activeFilter);
 
   return (
     <Section id="portfolio">

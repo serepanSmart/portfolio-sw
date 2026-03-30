@@ -17,7 +17,6 @@
   "dependencies": {
     "@floating-ui/react": "^0.27.19",
     "@formspree/react": "^3.0.0",
-    "@google/generative-ai": "^0.24.1",
     "groq-sdk": "^1.1.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

@@ -1,10 +1,3 @@
-// ─── Navigation ─────────────────────────────
-
-export type NavItem = {
-  readonly id: string;
-  readonly label: string;
-};
-
 // ─── Personal Info ──────────────────────────
 
 export type PersonalInfo = {

@@ -1,6 +1,5 @@
 import { EXPERIENCE } from '@/data';
 import { Section, Badge } from '@/components/ui';
-import type { ExperienceEntry } from '@/models';
 import styles from './experience.module.css';
 
 // "In my experience, there's no such thing as luck." - Obi-Wan Kenobi
@@ -8,7 +7,7 @@ import styles from './experience.module.css';
 export const Experience = (): React.JSX.Element => (
   <Section id="experience">
     <div className={styles.timeline}>
-      {(EXPERIENCE as readonly ExperienceEntry[]).map((entry, index) => (
+      {EXPERIENCE.map((entry, index) => (
         <div
           key={entry.id}
           className={`${styles.entry} ${index % 2 === 0 ? styles.left : styles.right}`}

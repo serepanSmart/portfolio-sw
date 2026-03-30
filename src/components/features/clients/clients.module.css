@@ -50,18 +50,26 @@
   left: 8px;
 }
 
-.tl::before {
-  top: 0;
-  left: 0;
+.tl::before,
+.tr::before,
+.bl::before,
+.br::before {
   width: 14px;
   height: 1px;
 }
 
+.tl::after,
+.tr::after,
+.bl::after,
+.br::after {
+  width: 1px;
+  height: 14px;
+}
+
+.tl::before,
 .tl::after {
   top: 0;
   left: 0;
-  width: 1px;
-  height: 14px;
 }
 
 .tr {
@@ -69,18 +77,10 @@
   right: 8px;
 }
 
-.tr::before {
-  top: 0;
-  right: 0;
-  width: 14px;
-  height: 1px;
-}
-
+.tr::before,
 .tr::after {
   top: 0;
   right: 0;
-  width: 1px;
-  height: 14px;
 }
 
 .bl {
@@ -88,18 +88,10 @@
   left: 8px;
 }
 
-.bl::before {
-  bottom: 0;
-  left: 0;
-  width: 14px;
-  height: 1px;
-}
-
+.bl::before,
 .bl::after {
   bottom: 0;
   left: 0;
-  width: 1px;
-  height: 14px;
 }
 
 .br {
@@ -107,18 +99,10 @@
   right: 8px;
 }
 
-.br::before {
-  bottom: 0;
-  right: 0;
-  width: 14px;
-  height: 1px;
-}
-
+.br::before,
 .br::after {
   bottom: 0;
   right: 0;
-  width: 1px;
-  height: 14px;
 }
 
 .card:hover .corner {
@@ -243,26 +227,27 @@
   flex-shrink: 0;
 }
 
-.btnBladeLeft {
+.btnBladeLeft,
+.btnBladeRight {
   width: 0;
   height: 2px;
+  transition: width var(--duration-slow) var(--ease-out);
+}
+
+.btnBladeLeft {
   background: var(--sw-blue);
   border-radius: var(--radius-full) 0 0 var(--radius-full);
   box-shadow:
     0 0 6px rgba(79, 164, 224, 0.4),
     0 0 12px rgba(79, 164, 224, 0.2);
-  transition: width var(--duration-slow) var(--ease-out);
 }
 
 .btnBladeRight {
-  width: 0;
-  height: 2px;
   background: var(--sw-red);
   border-radius: 0 var(--radius-full) var(--radius-full) 0;
   box-shadow:
     0 0 6px rgba(224, 48, 48, 0.4),
     0 0 12px rgba(224, 48, 48, 0.2);
-  transition: width var(--duration-slow) var(--ease-out);
 }
 
 .toggleBtn:hover .btnBladeLeft {

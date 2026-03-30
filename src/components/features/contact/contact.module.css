@@ -10,12 +10,17 @@
   border: var(--border-thin) solid var(--color-border-primary);
 }
 
-.formTitle {
+.formTitle,
+.infoTitle,
+.socialsTitle {
   font-family: var(--font-heading);
-  font-size: var(--text-2xl);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
   color: var(--color-accent-primary);
+}
+
+.formTitle {
+  font-size: var(--text-2xl);
   margin-bottom: var(--space-6);
 }
 
@@ -71,7 +76,6 @@
 }
 
 .textarea {
-  resize: vertical;
   min-height: 120px;
 }
 
@@ -85,7 +89,7 @@
   font-size: var(--text-lg);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: #000000;
+  color: var(--color-text-inverse);
   background: var(--color-accent-primary);
   border: none;
   cursor: pointer;
@@ -158,11 +162,7 @@
 }
 
 .infoTitle {
-  font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--color-accent-primary);
 }
 
 .contactList {
@@ -211,11 +211,7 @@
 }
 
 .socialsTitle {
-  font-family: var(--font-heading);
   font-size: var(--text-lg);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--color-accent-primary);
   margin-bottom: var(--space-4);
 }
 

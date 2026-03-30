@@ -1,5 +1,4 @@
 export type {
-  NavItem,
   PersonalInfo,
   ContactInfo,
   SocialLink,
@@ -19,7 +18,7 @@ export type {
   SectionTitles,
 } from './portfolio';
 
-export type { Theme, ThemeConfig } from './theme';
+export type { Theme } from './theme';
 
 export type {
   NavItemId,

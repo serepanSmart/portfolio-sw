@@ -151,11 +151,11 @@
 
 .primaryBtn {
   background: var(--color-accent-primary);
-  color: #000000;
+  color: var(--color-text-inverse);
 }
 
 .primaryBtn:hover {
-  color: #000000;
+  color: var(--color-text-inverse);
   box-shadow: var(--glow-yellow);
 }
 

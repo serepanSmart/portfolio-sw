@@ -42,6 +42,7 @@ export const About = (): React.JSX.Element => (
                 <div className={styles.traitIconWrapper}>
                   <img
                     src={skill.icon}
+                    alt=""
                     className={styles.traitIcon}
                     loading="lazy"
                   />

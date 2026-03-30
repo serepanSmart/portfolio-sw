@@ -51,7 +51,7 @@
   width: 8px;
   height: 8px;
   background: var(--color-accent-primary);
-  border: 2px solid var(--color-bg-primary);
+  border: var(--border-medium) solid var(--color-bg-primary);
   box-shadow: var(--glow-yellow);
 }
 

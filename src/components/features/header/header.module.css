@@ -214,7 +214,7 @@
   text-transform: uppercase;
   color: var(--color-text-secondary);
   text-decoration: none;
-  border-left: 2px solid transparent;
+  border-left: var(--border-medium) solid transparent;
   transition: var(--transition-colors);
 }
 

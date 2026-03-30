@@ -2,7 +2,6 @@ import { useForm, ValidationError } from '@formspree/react';
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/data';
 import { Section, SocialIcon } from '@/components/ui';
 import styles from './contact.module.css';
-import { useCallback } from 'react';
 
 // "Help me, Obi-Wan Kenobi. You're my only hope."
 
@@ -11,12 +10,9 @@ const FORMSPREE_ID = 'xwvrgzrn';
 export const Contact = (): React.JSX.Element => {
   const [state, handleSubmit] = useForm(FORMSPREE_ID);
 
-  const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>): void => {
-      void handleSubmit(e);
-    },
-    [handleSubmit]
-  );
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    void handleSubmit(e);
+  };
 
   return (
     <Section id="contact">
