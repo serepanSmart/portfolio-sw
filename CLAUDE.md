@@ -5,47 +5,58 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev          # Start Vite dev server
-npm run build        # Type-check + production build (tsc -b && vite build)
-npm run lint         # ESLint (flat config, TypeScript-aware)
+npm run dev          # Start Vite dev server (port 5173)
+npm run build        # tsc -b && vite build
+npm run preview      # Preview production build locally
+npm run lint         # ESLint on all TS/TSX files
 npm run lint:fix     # ESLint with auto-fix
-npm run format       # Prettier write (src/**/*.{ts,tsx,css})
-npm run format:check # Prettier check
-npm run type-check   # tsc --noEmit (no emit, just type errors)
-npm run preview      # Preview production build
+npm run type-check   # TypeScript check (no emit)
+npm run format       # Prettier format
+npm run format:check # Prettier check (CI-safe)
 ```
+
+Pre-commit hooks (husky + lint-staged) run ESLint and Prettier automatically on staged files.
 
 ## Architecture
 
-**React 19 + TypeScript + Vite portfolio site with a Star Wars theme.**
+Star Wars-themed portfolio SPA. React 19 + TypeScript + Vite + CSS Modules.
 
-### Data flow
+**Entry flow:** `index.html` → `src/main.tsx` → `src/App.tsx`
 
-`src/data.ts` is the single source of truth for all portfolio content — typed `as const` constants. Components import directly from it; there is no API fetching for content, no prop drilling, and no context for static data.
+`App.tsx` renders a full-viewport `StarField` canvas, a fixed `Header`, lazy-loaded page sections inside `<Suspense>`, a `Footer`, `ScrollToTop` FAB, and the `Chat` modal.
 
-### Component split
+**Key directories:**
 
-- `src/components/features/` — page sections (stateful, domain-aware): `hero`, `about`, `experience`, `portfolio`, `skills`, `clients`, `certifications`, `contact`, `chat`, `header`, `footer`
-- `src/components/ui/` — reusable primitives: `Badge`, `Loader`, `Section`, `SkillBar`, `SocialIcon`, `StarField`, `ScrollToTop`
+- `src/data.ts` — single source of truth for all portfolio content (skills, experience, clients, projects, certifications, quotes). Edit here to change content.
+- `src/components/features/` — page-level sections (hero, about, skills, experience, clients, portfolio, certifications, contact, chat, header, footer).
+- `src/components/ui/` — reusable primitives (StarField canvas, Section wrapper, Loader, Badge, SkillBar, SocialIcon, ScrollToTop).
+- `src/hooks/` — custom hooks: `useTheme`, `useScrollSpy`, `useIntersectionObserver`, `useScrollToTop`, `useRandomQuote`.
+- `src/stores/theme-store.ts` — Zustand store for dark/light theme, persisted to `localStorage`. Theme is also applied via `data-theme` attribute on `<html>` synchronously in `index.html` to prevent FOWT.
+- `src/services/chat-service.ts` — Groq API wrapper powering the C3PO chat assistant (model: `llama-3.3-70b-versatile`). Requires `VITE_GROQ_API_KEY` env var.
+- `src/models/` — TypeScript types for domain objects (portfolio, theme, chat, section IDs).
+- `src/styles/` — global CSS: `variables.css` (CSS custom properties / theme tokens), `reset.css`.
 
-`App.tsx` lazy-loads all below-fold sections (`About` through `Contact`) with a single `<Suspense>`. `Header`, `Hero`, `Footer`, `Chat`, and `StarField` are eagerly loaded.
+**Path aliases** (`@/*` → `src/*`, plus `@/components`, `@/hooks`, `@/stores`, `@/services`, `@/models`) are configured in both `tsconfig.json` and `vite.config.ts`.
 
-### Theming
+All major sections use `React.lazy()` + `Suspense` for code-splitting. Each component has a co-located `.module.css` file.
 
-CSS custom properties only — no CSS-in-JS. All theme tokens live in `src/styles/variables.css` under `[data-theme="light"]` / `[data-theme="dark"]` selectors. `main.tsx` sets `data-theme` on `<html>` synchronously from `localStorage` to prevent flash. The single Zustand store (`src/stores/theme-store.ts`) + `src/hooks/use-theme.ts` manage runtime toggling.
+## Code Style
 
-### AI chat service
+- Strict TypeScript (`noImplicitAny`, explicit return types required by ESLint).
+- `console.log` is disallowed; `console.warn` and `console.error` are allowed.
+- Prettier: 80-char line width, single quotes, trailing commas (ES5), semicolons.
+- Imports are organized (ESLint `import` plugin enforces order).
 
-`src/services/chat-service.ts` is a module-level singleton wrapping the Groq SDK (`llama-3.3-70b-versatile`). It maintains `conversationHistory` (capped at 20 messages) outside React state. The system prompt encodes a "Holocron" Star Wars persona with the full CV baked in.
+## Environment
 
-### Path aliases
+`VITE_GROQ_API_KEY` must be set (in `.env.local`) for the C3PO chat feature to work.
 
-`@` maps to `src/`, with sub-aliases `@/components`, `@/services`, `@/stores`, `@/hooks`, `@/models`. Defined in both `vite.config.ts` and `tsconfig.app.json`.
 
-### TypeScript strictness
+## Custom
 
-`strict`, `noUnusedLocals`, `noUnusedParameters`, `verbatimModuleSyntax`, `erasableSyntaxOnly` are all enabled. `no-explicit-any` is an ESLint error. Explicit function return types are warned.
-
-### Pre-commit hooks
-
-Husky + lint-staged run ESLint (auto-fix) and Prettier on staged `.ts/.tsx/.css/.json` files before every commit.
+- Never use `any` type or `as any` type assertions. Use proper typed assertions (e.g. `as SomeType`) or type guards instead.
+- Never use non-null assertion `!`. Use proper checks.
+- Always run TypeScript check before reporting a task as complete.
+- When working with interfaces and parameters always place fields in alphabetical order, optional fields should be at the end, also in alphabetical order: `interface Some { aField: string; bField: string; aFieldOpt?: number }`.
+- Always avoid using type casting, strictly always don't use `as any`, and avoid other casting: `as unknown as something`.
+- Don't nest ternary operators

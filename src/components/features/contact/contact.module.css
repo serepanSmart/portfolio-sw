@@ -69,6 +69,10 @@
   outline: none;
 }
 
+.inputError {
+  border-color: var(--sw-red);
+}
+
 .input:disabled,
 .textarea:disabled {
   opacity: 0.5;

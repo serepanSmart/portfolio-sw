@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/data';
 import { Section, SocialIcon } from '@/components/ui';
@@ -6,11 +7,145 @@ import styles from './contact.module.css';
 // "Help me, Obi-Wan Kenobi. You're my only hope."
 
 const FORMSPREE_ID = 'xwvrgzrn';
+const REQUIRED_ERROR = 'This field is required';
+
+type FieldKey = 'email' | 'message' | 'name';
+type FormErrors = Partial<Record<FieldKey, string>>;
+type FormTouched = Partial<Record<FieldKey, boolean>>;
+type FormspreeErrors = React.ComponentProps<typeof ValidationError>['errors'];
+
+interface FieldConfig {
+  id: FieldKey;
+  label: string;
+  placeholder: string;
+  rows?: number;
+  type?: string;
+}
+
+interface FormFieldProps {
+  config: FieldConfig;
+  error: string | undefined;
+  formspreeErrors: FormspreeErrors;
+  isDisabled: boolean;
+  isTouched: boolean | undefined;
+  onBlur: (key: FieldKey, value: string) => void;
+}
+
+const FORM_FIELDS: FieldConfig[] = [
+  { id: 'name', label: 'Name', placeholder: 'Your name, Jedi', type: 'text' },
+  { id: 'email', label: 'Email', placeholder: 'your@email.com', type: 'email' },
+  {
+    id: 'message',
+    label: 'Message',
+    placeholder: 'Your message across the galaxy...',
+    rows: 5,
+  },
+];
+
+const INITIAL_ERRORS: FormErrors = {
+  email: REQUIRED_ERROR,
+  message: REQUIRED_ERROR,
+  name: REQUIRED_ERROR,
+};
+
+const isValidEmail = (v: string): boolean =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+const isFormInput = (
+  el: Element | RadioNodeList | null,
+): el is HTMLInputElement | HTMLTextAreaElement =>
+  el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement;
+
+const validateField = (key: FieldKey, value: string): string | undefined => {
+  if (!value.trim()) {
+    return REQUIRED_ERROR;
+  }
+  if (key === 'email' && !isValidEmail(value)) {
+    return 'Enter a valid email address';
+  }
+  return undefined;
+};
+
+const FormField = ({
+  config,
+  error,
+  formspreeErrors,
+  isDisabled,
+  isTouched,
+  onBlur,
+}: FormFieldProps): React.JSX.Element => {
+  const { id, label, placeholder, rows, type } = config;
+  const showError = isTouched && Boolean(error);
+  const baseClass = rows ? styles.textarea : styles.input;
+  const inputClass = showError ? `${baseClass} ${styles.inputError}` : baseClass;
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void => {
+    onBlur(id, e.target.value);
+  };
+
+  return (
+    <div className={styles.field}>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
+      {rows ? (
+        <textarea
+          id={id}
+          name={id}
+          className={inputClass}
+          disabled={isDisabled}
+          placeholder={placeholder}
+          rows={rows}
+          onBlur={handleBlur}
+        />
+      ) : (
+        <input
+          id={id}
+          name={id}
+          className={inputClass}
+          disabled={isDisabled}
+          placeholder={placeholder}
+          type={type}
+          onBlur={handleBlur}
+        />
+      )}
+      {showError && <span className={styles.errorText}>{error}</span>}
+      <ValidationError
+        prefix={label}
+        field={id}
+        errors={formspreeErrors}
+        className={styles.errorText}
+      />
+    </div>
+  );
+};
 
 export const Contact = (): React.JSX.Element => {
   const [state, handleSubmit] = useForm(FORMSPREE_ID);
+  const [errors, setErrors] = useState<FormErrors>(INITIAL_ERRORS);
+  const [touched, setTouched] = useState<FormTouched>({});
+
+  const hasErrors = Object.values(errors).some(Boolean);
+
+  const handleBlur = (key: FieldKey, value: string): void => {
+    setTouched((prev) => ({ ...prev, [key]: true }));
+    setErrors((prev) => ({ ...prev, [key]: validateField(key, value) }));
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const nextErrors: FormErrors = {};
+    FORM_FIELDS.forEach(({ id }) => {
+      const el = form.elements.namedItem(id);
+      nextErrors[id] = validateField(id, isFormInput(el) ? el.value : '');
+    });
+    setErrors(nextErrors);
+    setTouched({ email: true, message: true, name: true });
+    if (Object.values(nextErrors).some(Boolean)) {
+      return;
+    }
     void handleSubmit(e);
   };
 
@@ -29,73 +164,22 @@ export const Contact = (): React.JSX.Element => {
             </div>
           ) : (
             <form className={styles.form} onSubmit={onSubmit}>
-              <div className={styles.field}>
-                <label htmlFor="name" className={styles.label}>
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  className={styles.input}
-                  placeholder="Your name, Jedi"
-                  required
-                  disabled={state.submitting}
+              {FORM_FIELDS.map((config) => (
+                <FormField
+                  key={config.id}
+                  config={config}
+                  error={errors[config.id]}
+                  formspreeErrors={state.errors}
+                  isDisabled={state.submitting}
+                  isTouched={touched[config.id]}
+                  onBlur={handleBlur}
                 />
-                <ValidationError
-                  prefix="Name"
-                  field="name"
-                  errors={state.errors}
-                  className={styles.errorText}
-                />
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="email" className={styles.label}>
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  className={styles.input}
-                  placeholder="your@email.com"
-                  required
-                  disabled={state.submitting}
-                />
-                <ValidationError
-                  prefix="Email"
-                  field="email"
-                  errors={state.errors}
-                  className={styles.errorText}
-                />
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="message" className={styles.label}>
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  className={styles.textarea}
-                  placeholder="Your message across the galaxy..."
-                  rows={5}
-                  required
-                  disabled={state.submitting}
-                />
-                <ValidationError
-                  prefix="Message"
-                  field="message"
-                  errors={state.errors}
-                  className={styles.errorText}
-                />
-              </div>
+              ))}
 
               <button
                 type="submit"
                 className={styles.submitBtn}
-                disabled={state.submitting}
+                disabled={state.submitting || hasErrors}
               >
                 {state.submitting ? (
                   'Transmitting...'
@@ -110,7 +194,6 @@ export const Contact = (): React.JSX.Element => {
           )}
         </div>
 
-        {/* Right: Contact Info */}
         <div className={styles.info}>
           <h3 className={styles.infoTitle}>Contact Details</h3>
 
